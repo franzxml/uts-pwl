@@ -1,26 +1,30 @@
-let mahasiswa = [
-  { id: 1, nama: "Budi", nim: "12345" },
-];
+import prisma from "../config/prisma.js";
 
-export const getAll = () => mahasiswa;
+export const getAll = () => prisma.mahasiswa.findMany();
 
 export const getById = (id) =>
-  mahasiswa.find((m) => m.id == id);
+  prisma.mahasiswa.findUnique({ where: { id: Number(id) } });
 
-export const create = (data) => {
-  const newData = {
-    id: Date.now(),
-    ...data,
-  };
-  mahasiswa.push(newData);
-};
+export const create = (data) =>
+  prisma.mahasiswa.create({
+    data: {
+      nim: data.nim,
+      nama: data.nama,
+      jurusan: data.jurusan,
+      angkatan: Number(data.angkatan),
+    },
+  });
 
-export const update = (id, data) => {
-  mahasiswa = mahasiswa.map((m) =>
-    m.id == id ? { ...m, ...data } : m
-  );
-};
+export const update = (id, data) =>
+  prisma.mahasiswa.update({
+    where: { id: Number(id) },
+    data: {
+      nim: data.nim,
+      nama: data.nama,
+      jurusan: data.jurusan,
+      angkatan: Number(data.angkatan),
+    },
+  });
 
-export const remove = (id) => {
-  mahasiswa = mahasiswa.filter((m) => m.id != id);
-};
+export const remove = (id) =>
+  prisma.mahasiswa.delete({ where: { id: Number(id) } });

@@ -38,3 +38,5 @@ src/public/css/output.css
 
 # Dev container
 .devcontainer
+
+/src/generated/prisma

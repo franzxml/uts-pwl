@@ -3,6 +3,8 @@
   <form onsubmit="return validateForm()" action="/mahasiswa/update/<%= mhs.id %>" method="POST">
     <input name="nama" value="<%= mhs.nama %>" class="w-full mb-3 p-2 border rounded" />
     <input name="nim" value="<%= mhs.nim %>" class="w-full mb-3 p-2 border rounded" />
+    <input name="jurusan" value="<%= mhs.jurusan %>" class="w-full mb-3 p-2 border rounded" />
+    <input name="angkatan" value="<%= mhs.angkatan %>" type="number" class="w-full mb-3 p-2 border rounded" />
     <div class="flex gap-3">
       <button class="bg-yellow-500 text-white px-4 py-2 rounded">
         Update
@@ -19,11 +21,13 @@
   function validateForm() {
     const nama = document.querySelector('input[name="nama"]').value;
     const nim = document.querySelector('input[name="nim"]').value;
-    if (!nama || !nim) {
+    const jurusan = document.querySelector('input[name="jurusan"]').value;
+    const angkatan = document.querySelector('input[name="angkatan"]').value;
+    if (!nama || !nim || !jurusan || !angkatan) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Nama dan NIM wajib diisi!',
+        text: 'Semua field wajib diisi!',
       });
       return false;
     }
